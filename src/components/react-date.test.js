@@ -4,51 +4,45 @@ import { mount } from 'enzyme';
 import ReactDate from './react-date';
 
 describe('<ReactDate />', () => {
-  let wrapper, props;
+  let component, props;
 
   describe('using default props', () => {
     beforeEach(() => {
       props = {
         dateString: 'Mon Jun 12 2017 09:07:06'
       };
-      wrapper = mount(<ReactDate {...props} />);
+      component = mount(<ReactDate {...props} />);
     });
 
-    it('sets default currentTimeZone to GMT', () => {
-      expect(wrapper.prop('currentTimeZone')).toEqual('GMT');
+
+
+    it('it renders .formatted-datetime', () => {
+      expect(component.hasClass('formatted-datetime')).toEqual(true);
     });
 
-    // Flaky depending on the time zone of the application
-    it('sets default timeZoneConversion to America/New_York', () => {
-      expect(wrapper.prop('timeZoneConversion')).toEqual('America/New_York');
+    it('converts time to GMT default', () => {
+      expect(component.find('.formatted-datetime').text()).toEqual('06/12/2017 - 05:07');
     });
-
-    it('sets default output format', () => {
-      expect(wrapper.prop('output')).toEqual('MM/DD/YYYY@hh:mm A');
-    });
-  })
+  });
 
   describe('customized props', () => {
     beforeEach(() => {
       props = {
         dateString: 'Mon Jun 12 2017 09:07:06',
-        currentTimeZone: 'Europe/London',
-        timeZoneConversion: 'American/Las_Angeles',
-        output: 'MM/DD/YYYY@hh:mm'
+        currentTimeZone: 'American/New_York',
+        timeZoneConversion: 'American/Los_Angeles',
+        output: 'MM/DD/YYYY@hh:mm A',
+        customClass: 'some-class'
       };
-      wrapper = mount(<ReactDate {...props} />);
+      component = mount(<ReactDate {...props} />);
 
-      it('sets custom currentTimeZone', () => {
-        expect(wrapper.prop('currentTimeZone')).toEqual('Europe/London')
+      it('renders custom class', () => {
+        expect(component.hasClass('some-class')).toEqual(true);
       });
 
-      it('sets custom timeZoneConversion', () => {
-        expect(wrapper.prop('timeZoneConversion')).toEqual('American/Las_Angeles')
-      })
       it('sets custom output format', () => {
-        expect(wrapper.prop('output')).toEqual('MM/DD/YYYY@hh:mm')
+        expect(component.find('.some-class').text()).toEqual('06/12/201@02:07 AM');
       })
     });
-
-  })
+  });
 })
