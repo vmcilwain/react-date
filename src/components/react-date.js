@@ -2,15 +2,12 @@ import MomentTimezone from 'moment-timezone';
 import React from 'react';
 
 export default class ReactDate extends React.Component {
-  constructor(props) {
-    super(props);
-  };
 
   static propTypes = {
     dateString: React.PropTypes.string.isRequired,
-    currentTimeZone: React.PropTypes.string.isRequired,
-    timeZoneConversion: React.PropTypes.string.isRequired,
-    output: React.PropTypes.string.isRequired
+    currentTimeZone: React.PropTypes.string,
+    timeZoneConversion: React.PropTypes.string,
+    output: React.PropTypes.string
   };
 
   static defaultProps = {
@@ -28,5 +25,5 @@ export default class ReactDate extends React.Component {
                          this.props.output)}
       </span>
     )
-  };
+  }
 }
