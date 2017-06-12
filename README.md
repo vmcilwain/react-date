@@ -1,6 +1,6 @@
 # React Date
 
-A react component that outputs a formmatted date using [moment-timezone](http://momentjs.com/timezone/)
+A react component that outputs a formatted date using [moment-timezone](http://momentjs.com/timezone/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
